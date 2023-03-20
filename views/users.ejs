@@ -1,0 +1,97 @@
+<html>
+	<head>
+		<title>User</title>
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		/>
+	</head>
+	<body>
+		<section class="content-header">
+			<h1>User</h1>
+		</section>
+
+		<div class="content">
+			<div class="box box-primary" style="margin: 5px; padding: 5px">
+				<div class="box-body">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Sr No</th>
+									<th>Name</th>
+									<th>Operations</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for (var i = 0; i < data.length ; i++) { %>
+								<tr>
+									<td><%= data[i].id %></td>
+									<td><%= data[i].name %></td>
+
+									<td>
+										<a href="/update?id=<%= data[i].id %>">Edit</a>
+										<a href="/delete?id=<%= data[i].id %>">Delete</a>
+									</td>
+								</tr>
+								<% }; %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="container-fluid">
+					<form action="/users" method="post">
+						<div class="col-sm-12">
+							<div class="col-sm-3">
+								<input
+									type="text"
+									name="name"
+									placeholder="enter name"
+									class="form-control"
+								/>
+							</div>
+							<div class="col-sm-9"></div>
+						</div>
+						<div class="col-sm-12">
+							<div class="col-sm-3">
+								<input
+									type="email"
+									name="email"
+									placeholder="enter email"
+									class="form-control col-md-3"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="col-md-3">
+								<input
+									type="text"
+									name="contact"
+									placeholder="enter contact no"
+									class="form-control col-md-3"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="col-md-3">
+								<input
+									type="text"
+									name="designation"
+									placeholder="enter designation "
+									class="form-control col-md-3"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="col-md-3">
+								<input type="submit" class="form-control btn-success col-md-3"
+								value"Save">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
