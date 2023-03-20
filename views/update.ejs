@@ -14,13 +14,14 @@
 
           <div class="container-fluid">
 
-                <form action="/updatesave" method="post">
-                <% if(edit) { %>
-                 <% for (var i = 0; i < edit.length ; i++){ %>
+                <form action="/users" method="post">
+                
+                    <% userDetail.forEach(function(user) { %>
+                    
                     
                     <div class="col-sm-12">
                         <div class="col-sm-3">
-                            <input type="text" name="name"  placeholder ="enter name" class="form-control " value=<%= edit[i].id %>>
+                            <input type="text" name="name"  placeholder ="enter name" class="form-control " value=<%= user.username %>>
                         </div>
                         <div class="col-sm-9"> </div>
                     </div>
@@ -32,8 +33,7 @@
                 </div>
                 </div>
                 </form>
-                                <% } %>
-                <% } %>
+                <% }); %> 
 
             </div>
         </div>
