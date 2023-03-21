@@ -8,19 +8,15 @@ const getData = async function (req, res, next) {
 }
 
 const addUser = async function (data) {
-  const name = data.name;
-  con.query("insert into user(username) values(?) ", [name], function (err, rows, fields) {
+  await con.query("insert into user (email, phone, username) values(?,?,?)", [data.email, data.phone, data.username], function (err, rows, fields) {
     if (err) {
       console.log("error", err);
     }
-    // else {
-    // res.json({ "ResponseCode": "1", "ResponseMessage": "success", "data": "Data Inserted Successfully!" });
-    // }
   });
 }
 
-const deleteUser = async function (userId) {
-  con.query("delete from user where id=?", [userId], function (err, rows, fields) {
+const deleteUser = async function (username) {
+  await con.query("delete from user where username=?", [username], function (err) {
     if (err) {
       console.log('Error', +err);
     }
@@ -30,15 +26,46 @@ const deleteUser = async function (userId) {
   });
 }
 
-const getUserDetail = async function (userId) {
-  const [rows] = await con.execute("SELECT * FROM user where id=?", [userId]);
+const getUserDetail = async function (username) {
+  const [rows] = await con.execute("SELECT * FROM user where username=?", [username]);
   return rows;
 }
 
+const updateUser = async function (userInfo) {
+  await con.query("UPDATE user SET ? where username=?", [userInfo.newInfo, userInfo.username], function (err, rows, fields) {
+    if (err) {
+      console.log("error", err);
+    }
+  })
+}
+
+const updateUserInfo = async function (userInfo) {
+  await con.query("UPDATE user SET ? where username=?", [userInfo.newInfo, userInfo.username], function (err, rows, fields) {
+    if (err) {
+      console.log("error", err);
+    }
+  })
+}
+
+const checkExist = async function (username) {
+  const [rows] = await con.execute("SELECT * FROM user where username=?", [username]);
+  if (rows.length > 0)
+    return true
+  return false
+}
+
+const sortData = async function (type, method) {
+  const [rows] = await con.execute(`SELECT * FROM user ORDER BY ${type} ${method}`);
+  return rows;
+}
 
 module.exports = {
   getData,
   addUser,
   deleteUser,
-  getUserDetail
+  getUserDetail,
+  updateUser,
+  checkExist,
+  updateUserInfo,
+  sortData
 };

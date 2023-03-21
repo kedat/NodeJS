@@ -5,6 +5,13 @@
 			rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+			integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 	</head>
 	<body>
 		<section class="content-header">
@@ -19,7 +26,17 @@
 							<thead>
 								<tr>
 									<th>Sr No</th>
-									<th>Name</th>
+									<th>
+										<span>Name</span>
+										<a href="/users/username/asc"
+											><i class="fa-solid fa-arrow-up"></i
+										></a>
+										<a href="/users/username/desc"
+											><i class="fa-solid fa-arrow-down"></i
+										></a>
+									</th>
+									<th>Email</th>
+									<th>Phone</th>
 									<th>Operations</th>
 								</tr>
 							</thead>
@@ -28,10 +45,14 @@
 								<tr>
 									<td><%= data[i].id %></td>
 									<td><%= data[i].username %></td>
-
+									<td><%= data[i].email %></td>
+									<td><%= data[i].phone %></td>
 									<td>
-										<form action="/users/delete/<%=data[i].id%>" method="POST">
-											<a href="/users/update/<%=data[i].id%>">Edit</a>
+										<form
+											action="/users/delete/<%=data[i].username%>"
+											method="POST"
+										>
+											<a href="/users/detail/<%=data[i].username%>">Edit</a>
 											<button type="submit">Delete</button>
 										</form>
 									</td>
@@ -48,8 +69,24 @@
 							<div class="col-sm-3">
 								<input
 									type="text"
-									name="name"
+									name="username"
 									placeholder="enter name"
+									class="form-control"
+								/>
+							</div>
+							<div class="col-sm-3">
+								<input
+									type="email"
+									name="email"
+									placeholder="enter email"
+									class="form-control"
+								/>
+							</div>
+							<div class="col-sm-3">
+								<input
+									type="number"
+									name="phone"
+									placeholder="enter phone"
 									class="form-control"
 								/>
 							</div>
@@ -57,8 +94,11 @@
 						</div>
 						<div class="col-sm-12">
 							<div class="col-md-3">
-								<input type="submit" class="form-control btn-success col-md-3"
-								value"Save">
+								<input
+									type="submit"
+									class="form-control btn-success col-md-3"
+									value="Save"
+								/>
 							</div>
 						</div>
 					</form>
